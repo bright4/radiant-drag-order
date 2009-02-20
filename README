@@ -1,0 +1,38 @@
+= Drag Order v0.2
+
+Created by Bright 4, February 2009. Inspired by and based on Sean Cribbs' Reorder extension.
+
+This extension allows pages to be moved to any arbitrary (valid) place in the document tree structure by dragging the page to its new position and dropping it there.
+The admin UI is extended with a small drag-button for each page.
+
+The drag-and-drop style was inspired by the way OS-X implements this in various screens.
+
+
+== Installation
+
+1) Unpack/checkout/export the extension into vendor/extensions of your project.
+
+2) Run the extension migrations (replace {environment} by the target environment, e.g. production).
+   $ rake {environment} radiant:extensions:drag_order:migrate
+
+3) Run the extension update task.
+   $ rake {environment} radiant:extensions:drag_order:update
+
+4) Restart the server and you're ready to drag-and-drop pages.
+   To bypass the ordering system simply supply a "by" option to the finder tags.
+
+
+== Usage
+
+- Click and hold the drag-button of the page you wish to move. If the page has children and is expanded, this page will collapse (because a page cannot be placed in between its descendants).
+- Drag the page to its new position. The purple bar shows the new location and indentation of the page.
+- If, while dragging, you hold the cursor above a page with collapsed children, this page will expand after one second.
+- If you want to place the page you are dragging as the child of a page which does not have any children yet, you can either press-and-hold Ctrl or Command or make sure the mouse cursor is located to the right of the drag-button.
+- If the page has been dragged to the correct location, release the mouse cursor. The admin page will reload with the page at its new position.
+
+
+== Notes
+
+- Requires Javascript
+- *** DOES NOT WORK IN (all versions of) SAFARI 2 ***
+  This is due to the fact that Radiants' own JS files do not work correctly under Safari 2

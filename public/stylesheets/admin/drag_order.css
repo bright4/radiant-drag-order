@@ -1,0 +1,27 @@
+.drag_order img {
+	cursor: move;
+}
+#content table.index tr.dragging {
+	background-color: #647481;
+}
+#content table.index tr.dragging td {
+	color: white;
+}
+div#drag_line {
+	position: relative;
+	height: 3px;
+	font-size: 0px;
+	background-color: #800080;
+}
+div#drag_line div {
+	position: absolute;
+	height: 9px;
+	width: 9px;
+	background-image: url(/images/admin/drag_order_circle.png);
+	margin: -3px 0 0 -9px;
+}
+/* IE PNG-alpha workaround */
+* html div#drag_line div {
+	background: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/admin/drag_order_circle.png', sizingMethod='scale');
+}
