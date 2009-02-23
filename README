@@ -1,4 +1,4 @@
-= Drag Order v0.2
+= Drag Order v0.2.1
 
 Created by Bright 4, February 2009. Inspired by and based on Sean Cribbs' Reorder extension.
 
@@ -36,3 +36,12 @@ The drag-and-drop style was inspired by the way OS-X implements this in various 
 - Requires Javascript
 - *** DOES NOT WORK IN (all versions of) SAFARI 2 ***
   This is due to the fact that Radiants' own JS files do not work correctly under Safari 2
+
+
+== Version History
+
+# v0.2.1 - 23-02-2009
+- Fixed JS bug that did not allow dragging of child pages which were loaded using AJAX after expanding a page.
+
+# v0.2   - 21-02-2009
+- Initial commit

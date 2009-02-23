@@ -20,11 +20,10 @@ var DragOrder = Class.create({
     
     // Attach listeners to drag images in table
     var _this = this;
-    $(table).getElementsBySelector('.drag_order').each(function(obj){
-      var img = obj.getElementsBySelector('img')[0];
-      if (img)
-        Event.observe(img, 'mousedown', _this.rowDragStart.bindAsEventListener( _this ));
-    });
+    Event.observe( $(table), 'mousedown', function(evt){
+      if ($(evt.target.parentNode).hasClassName('drag_order') && evt.target.tagName.toLowerCase() == 'img')
+        _this.rowDragStart(evt);
+    }.bindAsEventListener(this) );
     document.dragOrderObj = this;
   },
   
@@ -145,18 +144,17 @@ var DragOrder = Class.create({
   
   rowDragStop: function() {
     
-    if (this.moveTo.hovering != this.origRow) {
+    if (this.moveTo.hovering != this.origRow)
       window.location.href = "/admin/pages/" + this.sMap.extractPageId(this.origRow) + "/move_to/" + this.sMap.extractPageId(this.moveTo.relativeTo) + "/" + this.moveTo.side;
-    }
     else {  
       // Cleanup not necessary when redirected
       this.origRow.removeClassName('dragging');
-    
+      
       this.origRow = null;
       clearTimeout(this.expandObj.timer);
       this.expandObj = null;
       this.dragLine.hide();
-    
+      
       Event.stopObserving(document.body, 'mousemove', this.rowDragMove);
       Event.stopObserving(document.body, 'mouseup', this.rowDragStop);
     }
