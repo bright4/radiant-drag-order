@@ -20,8 +20,19 @@ div#drag_line div {
 	background-image: url(/images/admin/drag_order_circle.png);
 	margin: -3px 0 0 -9px;
 }
+div#drag_line div.copy {
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	background-image: url(/images/admin/drag_order_copy.png);
+	margin: -9px 0 0 -20px;
+}
 /* IE PNG-alpha workaround */
 * html div#drag_line div {
 	background: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/admin/drag_order_circle.png', sizingMethod='scale');
+}
+* html div#drag_line div.copy {
+	background: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/admin/drag_order_copy.png', sizingMethod='scale');
 }

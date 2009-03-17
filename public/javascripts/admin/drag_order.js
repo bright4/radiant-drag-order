@@ -5,6 +5,8 @@ var DragOrder = Class.create({
   AFTER     : 1,
   CHILD     : 2,
   CHILD_PAD : 21,
+  NO_COPY   : 0,
+  COPY      : 1,
   
   // Defaults
   origRow   : null,
@@ -37,8 +39,10 @@ var DragOrder = Class.create({
     this.childEdge = $(evt.target).cumulativeOffset().left + $(evt.target).getWidth();
     
     // Attach event listeners for the movement
-    Event.observe($(document.body), 'mousemove', this.rowDragMove.bindAsEventListener(this));
-    Event.observe($(document.body), 'mouseup', this.rowDragStop.bindAsEventListener(this));
+    this.moveBind = this.rowDragMove.bindAsEventListener(this);
+    Event.observe($(document.body), 'mousemove', this.moveBind);
+    this.stopBind = this.rowDragStop.bindAsEventListener(this);
+    Event.observe($(document.body), 'mouseup', this.stopBind);
     
     return this.cancelEvent(evt);
   },
@@ -103,7 +107,7 @@ var DragOrder = Class.create({
         // If on the lower half of the row, put the line at the bottom of the row
         else if (evt.pageY > top + _this.rowHeight / 2 && evt.pageY <= top + _this.rowHeight) {
           // Check for moving as new child
-          if (obj != _this.origRow && !_this.sMap.hasChildren(obj) && (evt.ctrlKey || evt.metaKey || evt.pageX > _this.childEdge)) {
+          if (obj != _this.origRow && !_this.sMap.hasChildren(obj) && evt.pageX > _this.childEdge) {
             targetRow = obj;
             targetLoc = _this.CHILD;
           }
@@ -112,6 +116,13 @@ var DragOrder = Class.create({
             targetLoc = obj.hasClassName('children-visible') ? _this.BEFORE : _this.AFTER;
           }
         }
+        
+        // Check for copy action
+        var copy = evt.ctrlKey || evt.metaKey ? true : false;
+        if (copy)
+          _this.dragLine.getElementsByTagName('div')[0].addClassName('copy');
+        else
+          _this.dragLine.getElementsByTagName('div')[0].removeClassName('copy');
       }
       
       // If a row has been found
@@ -124,10 +135,11 @@ var DragOrder = Class.create({
           top: targetRow.cumulativeOffset().top + (targetLoc == _this.AFTER  || targetLoc == _this.CHILD ? _this.rowHeight : 0) - 1 + 'px'
         });
         
-        // Store the found row
+        // Store the found row and options
         _this.moveTo.hovering = obj;
         _this.moveTo.relativeTo = targetRow;
         _this.moveTo.side = targetLoc;
+        _this.moveTo.copy = copy;
         
         return true;
       }
@@ -144,19 +156,19 @@ var DragOrder = Class.create({
   
   rowDragStop: function() {
     
-    if (this.moveTo.hovering != this.origRow)
-      window.location.href = "/admin/pages/" + this.sMap.extractPageId(this.origRow) + "/move_to/" + this.sMap.extractPageId(this.moveTo.relativeTo) + "/" + this.moveTo.side;
+    if (this.moveTo.relativeTo && (this.moveTo.hovering != this.origRow || this.moveTo.copy))
+      window.location.href = "/admin/pages/" + this.sMap.extractPageId(this.origRow) + "/move_to/" + this.sMap.extractPageId(this.moveTo.relativeTo) + "/" + this.moveTo.side + "/" + (this.moveTo.copy ? this.COPY : this.NO_COPY);
     else {  
       // Cleanup not necessary when redirected
       this.origRow.removeClassName('dragging');
       
       this.origRow = null;
-      clearTimeout(this.expandObj.timer);
+      if (this.expandObj.timer) clearTimeout(this.expandObj.timer);
       this.expandObj = null;
-      this.dragLine.hide();
+      if (this.dragLine) this.dragLine.hide();
       
-      Event.stopObserving(document.body, 'mousemove', this.rowDragMove);
-      Event.stopObserving(document.body, 'mouseup', this.rowDragStop);
+      Event.stopObserving(document.body, 'mousemove', this.moveBind);
+      Event.stopObserving(document.body, 'mouseup', this.stopBind);
     }
   },
   

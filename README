@@ -1,8 +1,8 @@
-= Drag Order v0.2.3
+= Drag Order v0.3
 
 Created by Bright 4, February 2009. Inspired by and based on Sean Cribbs' Reorder extension.
 
-This extension allows pages to be moved to any arbitrary (valid) place in the document tree structure by dragging the page to its new position and dropping it there.
+This extension allows pages to be moved or copied to any arbitrary (valid) place in the document tree structure by dragging the page to its new position and dropping it there.
 The admin UI is extended with a small drag-button for each page.
 
 The drag-and-drop style was inspired by the way OS-X implements this in various screens.
@@ -27,7 +27,9 @@ The drag-and-drop style was inspired by the way OS-X implements this in various 
 - Click and hold the drag-button of the page you wish to move. If the page has children and is expanded, this page will collapse (because a page cannot be placed in between its descendants).
 - Drag the page to its new position. The purple bar shows the new location and indentation of the page.
 - If, while dragging, you hold the cursor above a page with collapsed children, this page will expand after one second.
-- If you want to place the page you are dragging as the child of a page which does not have any children yet, you can either press-and-hold Ctrl or Command or make sure the mouse cursor is located to the right of the drag-button.
+- If you want to place the page you are dragging as the child of a page which does not have any children yet, you can make sure the mouse cursor is located to the right of the drag-button. The indentation of the purple bar will show the page will be placed as a child when the cursor is in that position.
+- If you want to copy a page, hold down Ctrl or Command. A + icon will show up indicating this.
+- The plugin automatically adds 'copy' and, when necessary, a number to the title, slug and breadcrumb when multiple copies are made.
 - If the page has been dragged to the correct location, release the mouse cursor. The admin page will reload with the page at its new position.
 
 
@@ -39,6 +41,11 @@ The drag-and-drop style was inspired by the way OS-X implements this in various 
 
 
 == Version History
+
+# v0.3   - 16-03-2009
+- Incorporated copy functionality. When pressing Ctrl or Command, you can copy the item.
+- Fixed errors which occurred when trying to place two pages with the same slugs. Now, the second one is seen as a copy.
+- Fixed some JS errors.
 
 # v0.2.3 - 16-03-2009
 - v0.2.2. was not really compatible with Radiant > 0.6.9... This one should be compatible with versions both before and after 0.7.

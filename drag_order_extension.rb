@@ -2,10 +2,11 @@
 require_dependency 'application'
 
 class DragOrderExtension < Radiant::Extension
-  version "0.2.3"
-  description "This extension allows pages to be moved to any arbitrary (valid) place in the 
-document tree structure by dragging the page to its new position and dropping it there. Created by 
-Bright 4, February 2009. Inspired by and based on Sean Cribbs' Reorder extension."
+  version "0.3"
+  description "This extension allows pages to be moved or copied to any arbitrary (valid)
+    place in the document tree structure by dragging the page to its new position and
+    dropping it there. Created by Bright 4, February 2009. Inspired by and based on Sean
+    Cribbs' Reorder extension."
   url "http://www.bright4.nl/"
 
   define_routes do |map|
@@ -16,7 +17,7 @@ Bright 4, February 2009. Inspired by and based on Sean Cribbs' Reorder extension
       path = "admin/pages"
     end
     map.with_options :controller => path do |page|
-      page.page_move_to "admin/pages/:id/move_to/:rel/:pos", :action => "move_to"
+      page.page_move_to "admin/pages/:id/move_to/:rel/:pos/:copy", :action => "move_to"
     end
   end
 
