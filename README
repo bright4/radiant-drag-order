@@ -1,4 +1,4 @@
-= Drag Order v0.2.1
+= Drag Order v0.2.2
 
 Created by Bright 4, February 2009. Inspired by and based on Sean Cribbs' Reorder extension.
 
@@ -39,6 +39,12 @@ The drag-and-drop style was inspired by the way OS-X implements this in various 
 
 
 == Version History
+
+# v0.2.3 - 16-03-2009
+- v0.2.2. was not really compatible with Radiant > 0.6.9... This one should be compatible with versions both before and after 0.7.
+
+# v0.2.2 - 12-03-2009
+- Made compatible with Radiant > 0.6.9
 
 # v0.2.1 - 23-02-2009
 - Fixed JS bug that did not allow dragging of child pages which were loaded using AJAX after expanding a page.
