@@ -166,10 +166,10 @@ var DragOrder = Class.create({
       if (this.expandObj.timer) clearTimeout(this.expandObj.timer);
       this.expandObj = null;
       if (this.dragLine) this.dragLine.hide();
+    }  
       
-      Event.stopObserving(document.body, 'mousemove', this.moveBind);
-      Event.stopObserving(document.body, 'mouseup', this.stopBind);
-    }
+    Event.stopObserving(document.body, 'mousemove', this.moveBind);
+    Event.stopObserving(document.body, 'mouseup', this.stopBind);
   },
   
   cancelEvent: function(evt) {

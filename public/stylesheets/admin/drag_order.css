@@ -2,7 +2,7 @@
 	cursor: move;
 }
 #content table.index tr.dragging {
-	background-color: #647481;
+	background-color: #D3ECF4;
 }
 #content table.index tr.dragging td {
 	color: white;

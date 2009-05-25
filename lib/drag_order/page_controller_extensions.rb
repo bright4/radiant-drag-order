@@ -26,7 +26,7 @@ module DragOrder::PageControllerExtensions
     @rel.reload
     if @loc != 2
       # Make room for the page
-      @new_siblings = Page.find_all_by_parent_id( @rel.parent.id, :conditions => [ "position >= " + (@rel.position + @loc).to_s ] )
+      @new_siblings = Page.find_all_by_parent_id( @rel.parent.id, :conditions => [ "position >= " + (@rel.position.to_i + @loc).to_s ] )
       @new_siblings.each do |s|
         if s.id != @page.id || @copy
           s.position += 1
@@ -47,7 +47,7 @@ module DragOrder::PageControllerExtensions
     old_parent = @page.parent
     if @loc != 2
       @page.parent = @rel.parent
-      @page.position = @rel.position + (@loc == 1 ? 1 : -1)
+      @page.position = @rel.position.to_i + (@loc == 1 ? 1 : -1)
     else
       @page.parent = @rel
       @page.position = 1

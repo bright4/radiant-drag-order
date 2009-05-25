@@ -1,4 +1,4 @@
-= Drag Order v0.3
+= Drag Order v0.3.1
 
 Created by Bright 4, February 2009. Inspired by and based on Sean Cribbs' Reorder extension.
 
@@ -10,7 +10,19 @@ The drag-and-drop style was inspired by the way OS-X implements this in various 
 
 == Installation
 
-1) Unpack/checkout/export the extension into vendor/extensions of your project.
+You can either use the automated radiant extension install, or install manually.
+
+=== Using Radiant extension install
+
+1) Install the extension using (from your project's root dir):
+   script/extension install drag_order
+
+2) Restart the server and you're ready to drag-and-drop pages.
+
+
+=== Manual install   
+
+1) Unpack/checkout/export the extension into {project root}/vendor/extensions/drag_order (note the underscore here).
 
 2) Run the extension migrations (replace {environment} by the target environment, e.g. production).
    $ rake {environment} radiant:extensions:drag_order:migrate
@@ -19,7 +31,6 @@ The drag-and-drop style was inspired by the way OS-X implements this in various 
    $ rake {environment} radiant:extensions:drag_order:update
 
 4) Restart the server and you're ready to drag-and-drop pages.
-   To bypass the ordering system simply supply a "by" option to the finder tags.
 
 
 == Usage
@@ -32,6 +43,8 @@ The drag-and-drop style was inspired by the way OS-X implements this in various 
 - The plugin automatically adds 'copy' and, when necessary, a number to the title, slug and breadcrumb when multiple copies are made.
 - If the page has been dragged to the correct location, release the mouse cursor. The admin page will reload with the page at its new position.
 
+To bypass the ordering system simply supply a "by" option to the finder tags.
+
 
 == Notes
 
@@ -41,6 +54,12 @@ The drag-and-drop style was inspired by the way OS-X implements this in various 
 
 
 == Version History
+
+# v0.3.1 - 25-05-2009
+- FIX: if the move request takes some time to finish, the dragline now stays put when dropped instead of still being dragged along with the mouse.
+- Changed color of the row that is being dragged to fit better with default Radiant colors.
+- Small robustness-fix for cases when the rake migrate is forgotten.
+- Modified install instructions in README.
 
 # v0.3   - 16-03-2009
 - Incorporated copy functionality. When pressing Ctrl or Command, you can copy the item.
