@@ -1,8 +1,8 @@
 # Uncomment this if you reference any of your controllers in activate
-require_dependency 'application'
+require_dependency( Kernel.const_get("ApplicationController") ? 'application_controller' : 'application')
 
 class DragOrderExtension < Radiant::Extension
-  version "0.3.1"
+  version "0.3.2"
   description "This extension allows pages to be moved or copied to any arbitrary (valid)
     place in the document tree structure by dragging the page to its new position and
     dropping it there. Created by Bright 4, February 2009. Inspired by and based on Sean
@@ -20,7 +20,7 @@ class DragOrderExtension < Radiant::Extension
       page.page_move_to "admin/pages/:id/move_to/:rel/:pos/:copy", :action => "move_to"
     end
   end
-
+  
   def activate
     index = (admin.page || admin.pages).index
     index.add :sitemap_head, "admin/pages/drag_order_header"

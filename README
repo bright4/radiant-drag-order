@@ -55,6 +55,9 @@ To bypass the ordering system simply supply a "by" option to the finder tags.
 
 == Version History
 
+# v0.3.2 - 18-11-2009
+- Made compatible with Radiant 0.8.1. This extension should now be compatible with at least version >= 0.6.9
+
 # v0.3.1 - 25-05-2009
 - FIX: if the move request takes some time to finish, the dragline now stays put when dropped instead of still being dragged along with the mouse.
 - Changed color of the row that is being dragged to fit better with default Radiant colors.
