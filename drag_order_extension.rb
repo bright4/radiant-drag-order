@@ -1,5 +1,5 @@
 # Uncomment this if you reference any of your controllers in activate
-require_dependency( Kernel.const_get("ApplicationController") ? 'application_controller' : 'application')
+require_dependency( Radiant::Version::Minor.to_i < 8 ? 'application' : 'application_controller' )
 
 class DragOrderExtension < Radiant::Extension
   version "0.3.2"
